@@ -50,8 +50,5 @@ public class ProductEntity {
         this.quantity = quantity;
     }
 
-    @Override
-    public boolean equals(Object obj) {
 
-    }
 }
