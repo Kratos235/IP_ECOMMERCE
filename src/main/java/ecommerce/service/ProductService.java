@@ -2,6 +2,8 @@ package ecommerce.service;
 
 import ecommerce.DTO.ProductDTO;
 import ecommerce.entity.ProductEntity;
+import org.modelmapper.ModelMapper;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -12,12 +14,18 @@ public class ProductService {
     //Dummy
     private List<ProductEntity> productList = new ArrayList<>();
 
+    //Modelmapper injection
+
+    @Autowired
+    private ModelMapper modelMapper;
+//Create
     public ProductDTO addProduct(ProductDTO dto) {
-        ProductEntity entity = new ProductEntity();
-        entity.setId(dto.getId());
-        entity.setName(dto.getName());
-        entity.setPrice(dto.getPrice());
-        entity.setQuantity(dto.getQuantity());
+        ProductEntity entity = modelMapper.map(dto, ProductEntity.class);
+//        entity.setId(dto.getId());
+//        entity.setName(dto.getName());
+//        entity.setPrice(dto.getPrice());
+//        entity.setQuantity(dto.getQuantity());
+
         productList.add(entity);
         return dto;
     }
@@ -25,11 +33,11 @@ public class ProductService {
     public List<ProductDTO> getAllProducts() {
         List<ProductDTO> dtoList = new ArrayList<>();
         for(ProductEntity entity : productList) {
-            ProductDTO dto = new ProductDTO();
-            dto.setId(entity.getId());
-            dto.setName(entity.getName());
-            dto.setPrice(entity.getPrice());
-            dto.setQuantity(entity.getQuantity());
+            ProductDTO dto = modelMapper.map(entity, ProductDTO.class);
+//            dto.setId(entity.getId());
+//            dto.setName(entity.getName());
+//            dto.setPrice(entity.getPrice());
+//            dto.setQuantity(entity.getQuantity());
             dtoList.add(dto);
         }
 
@@ -39,11 +47,11 @@ public class ProductService {
     public ProductDTO getProductById(int id) {
         for(ProductEntity entity:productList) {
             if(entity.getId() == id) {
-                ProductDTO dto = new ProductDTO();
-                dto.setId(entity.getId());
-                dto.setName(entity.getName());
-                dto.setPrice(entity.getPrice());
-                dto.setQuantity(entity.getQuantity());
+                ProductDTO dto = modelMapper.map(entity, ProductDTO.class);
+//                dto.setId(entity.getId());
+//                dto.setName(entity.getName());
+//                dto.setPrice(entity.getPrice());
+//                dto.setQuantity(entity.getQuantity());
                 return dto;
             }
         }
