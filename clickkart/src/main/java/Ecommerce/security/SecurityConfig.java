@@ -33,7 +33,6 @@ public class SecurityConfig {
     @Bean
     public DaoAuthenticationProvider authenticationProvider() {
         DaoAuthenticationProvider provider = new DaoAuthenticationProvider(userDetailsService);
-        provider.setUserDetailsService(userDetailsService);
         provider.setPasswordEncoder(passwordEncoder());
         return provider;
     }
@@ -61,7 +60,7 @@ public class SecurityConfig {
             )
             .authenticationProvider(authenticationProvider())
             .addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class)
-            .headers(headers -> headers.frameOptions(frame -> frame.disable())); // H2 console ke liye
+            .headers(headers -> headers.frameOptions(frameOptions -> frameOptions.disable())); // H2 console ke liye
 
         return http.build();
     }

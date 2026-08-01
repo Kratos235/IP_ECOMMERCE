@@ -15,7 +15,7 @@ public class UserEntity {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
     @Column(unique = true,nullable = false)
-    private String userName;
+    private String username;
 
     private String password;
     @Enumerated(EnumType.STRING)

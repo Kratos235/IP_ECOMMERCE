@@ -26,7 +26,7 @@ public class CustomUserDetailsService implements UserDetailsService {
         // Spring Security ko role ke aage "ROLE_" prefix chahiye (hasRole() isko khud add karta hai
         // authority check karte waqt, isliye yaha explicitly add kar rahe hai)
         return new User(
-                user.getUserName(),
+                user.getUsername(),
                 user.getPassword(),
                 List.of(new SimpleGrantedAuthority("ROLE_" + user.getRole().name()))
         );

@@ -36,7 +36,7 @@ public class AuthService {
             return "Username already exists.";
         }
         UserEntity user = new UserEntity();
-        user.setUserName(dto.getUserName());
+        user.setUsername(dto.getUserName());
         user.setPassword(passwordEncoder.encode(dto.getPassword()));
         Role role = (dto.getRole() !=null && dto.getRole().equalsIgnoreCase("ADMIN"))?Role.ADMIN:Role.USER;
         user.setRole(role);
@@ -48,7 +48,7 @@ public class AuthService {
         authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(dto.getUserName(),dto.getPassword()));
         UserEntity user = userRepository.findByUsername(dto.getUserName()).orElseThrow(()->new RuntimeException("User not found"));
 
-        String token= jwtUtil.generateToken(user.getUserName(),user.getRole().name());
-        return new AuthResponseDTO(token,user.getUserName(),user.getRole().name());
+        String token= jwtUtil.generateToken(user.getUsername(),user.getRole().name());
+        return new AuthResponseDTO(token,user.getUsername(),user.getRole().name());
     }
 }

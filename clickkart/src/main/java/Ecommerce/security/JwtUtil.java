@@ -11,6 +11,7 @@ import java.util.Date;
 import java.util.function.Function;
 
 @Component
+@SuppressWarnings({"deprecation", "unused"})
 public class JwtUtil {
 
     // NOTE for students: demo ke liye secret yaha hardcode kiya hai.
@@ -53,7 +54,7 @@ public class JwtUtil {
     }
 
     private Claims extractAllClaims(String token) {
-        return Jwts.parserBuilder()
+        return Jwts.parser()
                 .setSigningKey(getSigningKey())
                 .build()
                 .parseClaimsJws(token)
